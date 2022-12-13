@@ -8,14 +8,6 @@ pub fn app() -> Html {
             <RouteOutlet />
     }
 }
-#[function_component]
-fn ttt() -> Html {
-    html! {
-        <div>
-            <nav::Nav/>
-        </div>
-    }
-}
 fn main() {
     wasm_logger::init(wasm_logger::Config::default());
     yew::Renderer::<App>::new().render();

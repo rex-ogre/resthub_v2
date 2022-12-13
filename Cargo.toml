@@ -11,9 +11,14 @@ stylist = "0.10"
 log = "0.4.17"
 wasm-logger = "0.2.0"
 patternfly-yew = "0.2.3"
+yew-router = "0.17.0"
 view = {path = "view"}
+router = {path = "router" }
+about = { path = "pages/about" }
 [workspace]
 
 members = [
     "view",
+    "router",
+    "pages/about"	
 ]

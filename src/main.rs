@@ -1,10 +1,15 @@
-use patternfly_yew::*;
+use routes::RouteOutlet;
 use view::nav;
 use yew::prelude::*;
+mod routes;
+#[function_component(App)]
+pub fn app() -> Html {
+    html! {
+            <RouteOutlet />
+    }
+}
 #[function_component]
-fn App() -> Html {
-   
-
+fn ttt() -> Html {
     html! {
         <div>
             <nav::Nav/>

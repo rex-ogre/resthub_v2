@@ -5,7 +5,7 @@ use yew_router::prelude::*;
 fn switch(routes: RootRoutes) -> Html {
     match routes {
         RootRoutes::About => html! { <About /> },
-        _ => html! { {"error"} },
+        _ => html! { {"error12324"} },
     }
 }
 

@@ -850,7 +850,7 @@ function initSync(module) {
 
 async function init(input) {
     if (typeof input === 'undefined') {
-        input = new URL('resthubs_v2-1c4bd3880ef991de_bg.wasm', import.meta.url);
+        input = new URL('resthubs_v2-bd8cb14c04f57a66_bg.wasm', import.meta.url);
     }
     const imports = getImports();
 

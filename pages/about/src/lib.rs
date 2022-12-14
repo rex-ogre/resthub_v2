@@ -31,17 +31,17 @@ pub fn about() -> Html {
         }
         .content {
         margin: 2em ;
-        transform: translate(-50%, 0%);
+        transform: translate(-25%, 0%);
         position: relative;
-        width:50%;
-        left: 50%;
+        width:80%;
+        left: 35%;
         display:flex;
         }
         ul.content {
         margin: 2em ;
-        transform: translate(-50%, 0%);
+        transform: translate(-25%, 0%);
         position: relative;
-        left: 50%;
+        left: 15%;
         background: yellow;
         }
     "

@@ -21,8 +21,8 @@ pub fn about() -> Html {
         }
         .imgfornow {
         margin: 2em ;
-        height: 1000px;
-        width: 80%;
+        height: 800px;
+        width: 75%;
         padding: 0;
         background: pink;
         position: relative;
@@ -33,7 +33,7 @@ pub fn about() -> Html {
         margin: 2em ;
         transform: translate(-25%, 0%);
         position: relative;
-        width:80%;
+        width:70%;
         left: 35%;
         display:flex;
         }

@@ -15,10 +15,12 @@ yew-router = "0.17.0"
 view = {path = "view"}
 router = {path = "router" }
 about = { path = "pages/about" }
+utils = { path = "utils"}
 [workspace]
 
 members = [
     "view",
     "router",
-    "pages/about"	
+    "pages/about",	
+    "utils"
 ]

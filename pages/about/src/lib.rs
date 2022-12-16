@@ -1,5 +1,7 @@
+use log::info;
 use stylist::css;
 use stylist::style;
+use utils::theme_provider;
 use view::nav;
 use yew::prelude::*;
 #[function_component(About)]
@@ -44,9 +46,24 @@ pub fn about() -> Html {
         left: 15%;
         background: yellow;
         }
+        theme_provider {
+        display:flex;
+        position: relative;
+        border: 1px solid gray;
+        margin: 3px;
+        height: 50px;
+        width: 250px;
+        background-color: powderblue;
+        }
     "
     )
     .unwrap();
+    let onclick: Callback<MouseEvent> = {
+        Callback::from(move |_| {
+            theme_provider::mount_on_dom();
+            info!("Hello ");
+        })
+    };
     html! {
         <>
             <nav::Nav/>
@@ -66,6 +83,9 @@ pub fn about() -> Html {
 
                 <p class="content">{"ety of open source projects including:"}</p>
                 <p class="content">{"open source projects including:"}</p>
+                  <button  type="button" onclick={onclick} >{"切換主題"}</button>
+
+                <theme_provider/>
                  </article>
                 </div>
                 </body>

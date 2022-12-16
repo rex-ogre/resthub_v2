@@ -1,4 +1,4 @@
-use utils::*;
+use utils::theme_provider;
 use yew::prelude::*;
 #[function_component]
 pub fn Nav() -> Html {
@@ -23,9 +23,8 @@ pub fn Nav() -> Html {
         <li><a href="#">{"Home"}</a></li>
         <li><a href="#">{"About"}</a></li>
         <li><a href="#">{"Services"}</a></li>
-        <li><a href="#">{"Gallery"}</a></li>
-        <li><a href="#">{"Feedback"}</a></li>
         </ul>
+        <theme_provider/>
         </div>
         /*
         <div class="content">

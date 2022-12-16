@@ -5,6 +5,9 @@
   font-family: 'Lato', sans-serif;
   font-family: 'Oswald', sans-serif;
 }
+html.dark {
+ background-color: rgb(255, 255, 128);
+}
 .nav-menu {
     position: relative;
     padding: 10px 25px 10px 0;
@@ -197,5 +200,9 @@ input[type="checkbox"]{
    transition-delay: .6s;
   transform: translateX(-100px);
 }
-
+.contentdark{
+  font-size: 55px;
+  font-weight: 600;
+  background: yellow;
+}
 

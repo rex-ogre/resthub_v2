@@ -6,7 +6,9 @@ version = 3
 name = "about"
 version = "0.1.0"
 dependencies = [
+ "log",
  "stylist",
+ "utils",
  "view",
  "yew 0.20.0",
 ]
@@ -840,6 +842,7 @@ name = "resthubs_v2"
 version = "0.1.0"
 dependencies = [
  "about",
+ "js-sys",
  "log",
  "patternfly-yew",
  "router",
@@ -1144,6 +1147,7 @@ checksum = "c0edd1e5b14653f783770bce4a4dabb4a5108a5370a5f5d8cfe8710c361f6c8b"
 name = "utils"
 version = "0.1.0"
 dependencies = [
+ "js-sys",
  "log",
  "patternfly-yew",
  "stylist",

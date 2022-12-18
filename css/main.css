@@ -4,6 +4,7 @@
   box-sizing: border-box;
   font-family: 'Lato', sans-serif;
   font-family: 'Oswald', sans-serif;
+  fjnlvkdfv
 }
 html.dark {
  background-color: rgb(255, 255, 128);
@@ -52,7 +53,7 @@ body {
   /* background: linear-gradient(375deg, #1cc7d0, #2ede98); */
  /* background: linear-gradient(-45deg, #e3eefe 0%, #efddfb 100%);*/
   transition: all 0.6s ease-in-out;
-  
+
 }
 #active:checked ~ .wrapper{
   /*left: 0;*/
@@ -86,7 +87,7 @@ top:0;
 	top: calc(50% - 1px);
 	left: 30%;
 	width: 40%;
-	border-bottom: 2px solid #000;
+	border-bottom: 2px solid #fff;
 	transition: transform .6s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .menu-btn:before{
@@ -205,4 +206,3 @@ input[type="checkbox"]{
   font-weight: 600;
   background: yellow;
 }
-

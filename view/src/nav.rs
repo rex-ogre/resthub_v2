@@ -1,7 +1,7 @@
 use utils::theme_provider;
 use yew::prelude::*;
 #[function_component]
-pub fn Nav() -> Html {
+pub fn rhNav() -> Html {
     html! {
             <>
                 <head>

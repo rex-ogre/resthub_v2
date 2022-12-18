@@ -1,8 +1,7 @@
 use log::info;
-use stylist::css;
 use stylist::style;
 use utils::theme_provider;
-use view::nav;
+use view::{nav,footer};
 use yew::prelude::*;
 #[function_component(About)]
 pub fn about() -> Html {
@@ -39,20 +38,15 @@ pub fn about() -> Html {
         left: 35%;
         display:flex;
         }
-        ul.content {
-        margin: 2em ;
-        transform: translate(-25%, 0%);
-        position: relative;
-        left: 15%;
-        background: yellow;
-        }
-        theme_provider {
+        footer {
+        transform: translate(-50%, 0%);
         display:flex;
         position: relative;
         border: 1px solid gray;
+        let: 50%;
         margin: 3px;
-        height: 50px;
-        width: 250px;
+        height: 20%;
+        width: 60%;
         background-color: powderblue;
         }
     "
@@ -66,7 +60,7 @@ pub fn about() -> Html {
     };
     html! {
         <>
-            <nav::Nav/>
+            <nav::rhNav/>
                 <body>
                   <div class={&style.get_class_name().to_string()}>
                 <article>
@@ -83,12 +77,11 @@ pub fn about() -> Html {
 
                 <p class="content">{"ety of open source projects including:"}</p>
                 <p class="content">{"open source projects including:"}</p>
-                  <button  type="button" onclick={onclick} >{"切換主題"}</button>
-
-                <theme_provider/>
+                  <button  type="button" onclick={onclick} >{"切換主題32"}</button>
                  </article>
                 </div>
                 </body>
+                <footer::rh_footer/>
             </>
     }
 }

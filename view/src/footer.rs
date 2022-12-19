@@ -1,5 +1,5 @@
-use yew::prelude::*;
 use stylist::style;
+use yew::prelude::*;
 
 #[function_component]
 pub fn rh_footer() -> Html {
@@ -23,13 +23,14 @@ pub fn rh_footer() -> Html {
   color: #E8D0CB;
   }
         "
-        ).unwrap();
+    )
+    .unwrap();
     html! {
         <>
         <footer>
-            <div class={&styles.get_class_name().to_string()} > 
-            <p class={"left"}> {"© 2022 RestHubs"}</p>    
-            <p class={"right"} > {"designed by Rex"}</p>
+            <div class={&styles.get_class_name().to_string()} >
+            <p class={"left"}> {"© 2022 RestHubs"}</p>
+            <p class={"right"} > {"designed by Rex123"}</p>
             </div>
         </footer>
         </>

@@ -1,7 +1,7 @@
 use log::info;
 use stylist::style;
 use utils::theme_provider;
-use view::{nav,footer};
+use view::{footer, nav};
 use yew::prelude::*;
 #[function_component(About)]
 pub fn about() -> Html {
@@ -52,12 +52,6 @@ pub fn about() -> Html {
     "
     )
     .unwrap();
-    let onclick: Callback<MouseEvent> = {
-        Callback::from(move |_| {
-            theme_provider::mount_on_dom();
-            info!("Hello ");
-        })
-    };
     html! {
         <>
             <nav::rhNav/>
@@ -77,7 +71,6 @@ pub fn about() -> Html {
 
                 <p class="content">{"ety of open source projects including:"}</p>
                 <p class="content">{"open source projects including:"}</p>
-                  <button  type="button" onclick={onclick} >{"切換主題32"}</button>
                  </article>
                 </div>
                 </body>

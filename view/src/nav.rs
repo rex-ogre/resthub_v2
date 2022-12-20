@@ -9,10 +9,12 @@ pub fn rhNav() -> Html {
     let onclick: Callback<MouseEvent> = {
         Callback::from(move |_| {
             dark_state.dispatch(!dark_state.dark_theme);
-            theme_provider::mount_on_dom(dark_state.dark_theme);
+           // theme_provider::mount_on_dom(dark_state.dark_theme);
         })
     };
 
+
+    theme_provider::mount_on_dom(switch_state);
     html! {
         <>
         <header>

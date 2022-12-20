@@ -1,27 +1,20 @@
 use log::info;
-use utils::theme_provider;
+use std::rc::Rc;
+use utils::theme_provider::{self, Theme};
 use yew::prelude::*;
 #[function_component]
 pub fn rhNav() -> Html {
-    let dark_state = use_state(|| false);
+    let dark_state = use_context::<UseReducerHandle<Theme>>().unwrap();
+    let switch_state: bool = dark_state.dark_theme;
     let onclick: Callback<MouseEvent> = {
         Callback::from(move |_| {
-            let dark_state = dark_state.clone();
-            theme_provider::mount_on_dom(*dark_state);
-            info!("Hello ");
-            dark_state.set(!*dark_state);
+            dark_state.dispatch(!dark_state.dark_theme);
+            theme_provider::mount_on_dom(dark_state.dark_theme);
         })
     };
+
     html! {
-            <>
-                <head>
-
-        <link href="https://fonts.googleapis.com/css2?family=Oswald&display=swap" rel="stylesheet"/>
-        <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet"/>
-        <link rel="preconnect" href="https://fonts.googleapis.com"/>
-        <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet"/>
-          </head>
-
+        <>
         <header>
         <nav class="nav-menu">
         <h2 class="logo">{"RestHub"} </h2>
@@ -36,7 +29,7 @@ pub fn rhNav() -> Html {
         </ul>
         <div class="toggle">
         <p>{"Toggle Dark Mode"}</p>
-        <input class="test" type="checkbox" id="switch" onclick={onclick} />
+        <input class="test" type="checkbox" id="switch" onclick={onclick} checked={switch_state}/>
              <label class="tl" for="switch">
                  </label>
                  </div>

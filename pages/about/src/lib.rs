@@ -1,6 +1,6 @@
 use log::info;
 use stylist::style;
-use utils::theme_provider;
+use utils::theme_provider::Theme;
 use view::{footer, nav};
 use yew::prelude::*;
 #[function_component(About)]
@@ -52,17 +52,17 @@ pub fn about() -> Html {
     "
     )
     .unwrap();
+    let theme = use_context::<UseReducerHandle<Theme>>().expect("no ctx found");
     html! {
         <>
             <nav::rhNav/>
-                <body>
                   <div class={&style.get_class_name().to_string()}>
                 <article>
             <p class="date">
              {"09. April 2014" }
             </p>
             <h1 class="title">
-            {"About Rex"}
+            {"About Rex"}{theme.dark_theme.to_string()}
             </h1>
                          <div class="imgfornow">
                 </div>
@@ -73,7 +73,6 @@ pub fn about() -> Html {
                 <p class="content">{"open source projects including:"}</p>
                  </article>
                 </div>
-                </body>
                 <footer::rh_footer/>
             </>
     }

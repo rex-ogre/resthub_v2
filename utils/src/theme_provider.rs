@@ -30,15 +30,20 @@ pub fn get_theme_from_storage() -> Theme {
         .unwrap()
         .expect("unwrap local_storage failed");
 
-    info!("local_storage.get_item");
+    info!("local_storage.get_item....");
     match local_storage.get_item(THEME_KEY).unwrap() {
-        Some(theme) => Theme::from_storage(theme.to_string()),
+        Some(theme) => {
+            info!("get from local_storage theme is {}", theme.to_string());
+            Theme::from_storage(theme.to_string())
+        }
         None => match use_prefered_dark() {
             true => {
+                info!("doesn't get from storage, default is dark");
                 set_theme(true);
                 Theme::from_storage("dark".to_string())
             }
             false => {
+                info!("doesn't get from storage, default is light");
                 set_theme(false);
                 Theme::from_storage("light".to_string())
             }
@@ -74,7 +79,7 @@ pub fn mount_on_dom(is_dark: bool) {
             .remove(&arr)
             .expect("remove dark failed");
     }
-    log::info!("element_info is here,{} ", is_dark);
+    log::info!("render theme here,true means dark  {} ", is_dark);
 }
 pub fn use_prefered_dark() -> bool {
     let window = web_sys::window().expect("no global `window` exists");

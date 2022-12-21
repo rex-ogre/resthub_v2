@@ -17,11 +17,13 @@ view = {path = "view"}
 router = {path = "router" }
 about = { path = "pages/about" }
 utils = { path = "utils"}
+home = { path = "pages/home"}
 [workspace]
 
 members = [
     "view",
     "router",
     "pages/about",	
-    "utils"
+    "utils",
+    "pages/home"
 ]

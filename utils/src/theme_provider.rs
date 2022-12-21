@@ -1,3 +1,4 @@
+use log::info;
 use wasm_bindgen::JsValue;
 use web_sys::window;
 use yew::prelude::*;
@@ -11,6 +12,46 @@ impl Reducible for Theme {
     fn reduce(self: std::rc::Rc<Self>, action: Self::Action) -> std::rc::Rc<Self> {
         Theme { dark_theme: action }.into()
     }
+}
+impl Theme {
+    pub fn from_storage(local_storage: String) -> Theme {
+        if local_storage == "dark" {
+            Theme { dark_theme: true }
+        } else {
+            Theme { dark_theme: false }
+        }
+    }
+}
+const THEME_KEY: &'static str = "THEME";
+pub fn get_theme_from_storage() -> Theme {
+    let local_storage = window()
+        .unwrap()
+        .local_storage()
+        .unwrap()
+        .expect("unwrap local_storage failed");
+
+    info!("local_storage.get_item");
+    match local_storage.get_item(THEME_KEY).unwrap() {
+        Some(theme) => Theme::from_storage(theme.to_string()),
+        None => match use_prefered_dark() {
+            true => {
+                set_theme(true);
+                Theme::from_storage("dark".to_string())
+            }
+            false => {
+                set_theme(false);
+                Theme::from_storage("light".to_string())
+            }
+        },
+    }
+}
+pub fn set_theme(theme: bool) {
+    let local_storage = web_sys::window().unwrap().local_storage().unwrap().unwrap();
+    info!("set_theme {}", theme);
+    match theme {
+        true => local_storage.set_item(THEME_KEY, "dark").unwrap(),
+        false => local_storage.set_item(THEME_KEY, "light").unwrap(),
+    };
 }
 
 pub fn mount_on_dom(is_dark: bool) {
@@ -47,5 +88,6 @@ pub fn use_prefered_dark() -> bool {
         },
         Err(_) => {}
     };
+    info!("use_prefered_dark{}", is_perfered_dark);
     is_perfered_dark
 }

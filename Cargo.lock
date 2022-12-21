@@ -496,6 +496,17 @@ dependencies = [
 ]
 
 [[package]]
+name = "home"
+version = "0.1.0"
+dependencies = [
+ "log",
+ "stylist",
+ "utils",
+ "view",
+ "yew 0.20.0",
+]
+
+[[package]]
 name = "iana-time-zone"
 version = "0.1.53"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -842,6 +853,7 @@ name = "resthubs_v2"
 version = "0.1.0"
 dependencies = [
  "about",
+ "home",
  "js-sys",
  "log",
  "patternfly-yew",

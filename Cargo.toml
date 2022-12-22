@@ -18,6 +18,7 @@ router = {path = "router" }
 about = { path = "pages/about" }
 utils = { path = "utils"}
 home = { path = "pages/home"}
+search = { path = "pages/search"}
 [workspace]
 
 members = [

@@ -1,6 +1,7 @@
 use about::About;
 use home::Home;
 use router::RootRoutes;
+use search::Search;
 use std::rc::Rc;
 use utils::theme_provider::{get_theme_from_storage, use_prefered_dark, Theme};
 use yew::prelude::*;
@@ -9,6 +10,7 @@ fn switch(routes: RootRoutes) -> Html {
     match routes {
         RootRoutes::About => html! { <About /> },
         RootRoutes::Root => html! {<Home/>},
+        RootRoutes::Search => html! {<Search/>},
         _ => html! {"no shit"},
     }
 }

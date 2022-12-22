@@ -3,6 +3,7 @@ use wasm_bindgen::JsValue;
 use web_sys::window;
 use yew::prelude::*;
 #[derive(Clone, Debug, PartialEq, Eq)]
+
 pub struct Theme {
     pub dark_theme: bool,
 }

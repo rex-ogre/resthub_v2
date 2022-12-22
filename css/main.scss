@@ -216,7 +216,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    z-index:99999;
         }
 input.test[type=checkbox]{
 	height: 0;
@@ -259,9 +258,9 @@ input.test:checked + label.tl:after {
 div.toggle {
   display:flex;
   position: absolute;
-  top:53%;
+  top:83%;
   left:70%;
-  height: 3%;
+  height: 13%;
   width:80%;
   transform: translate(-50%, -50%);
 }

@@ -12,4 +12,5 @@ log = "0.4.17"
 wasm-logger = "0.2.0"
 patternfly-yew = "0.2.3"
 utils = { path = "../utils"}
-
+yew-router = "0.17.0"
+router = { path = "../router"}

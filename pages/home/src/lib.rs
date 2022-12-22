@@ -20,16 +20,6 @@ pub fn home() -> Html {
             font-size: 120%;
             font-weight: 400;
         }
-        .imgfornow {
-        margin: 2em ;
-        height: 800px;
-        width: 75%;
-        padding: 0;
-        background: pink;
-        position: relative;
-        left: 50%;
-        transform: translate(-50%, 0%);
-        }
         .content {
         margin: 2em ;
         transform: translate(-25%, 0%);
@@ -38,24 +28,13 @@ pub fn home() -> Html {
         left: 35%;
         display:flex;
         }
-        footer {
-        transform: translate(-50%, 0%);
-        display:flex;
-        position: relative;
-        border: 1px solid gray;
-        let: 50%;
-        margin: 3px;
-        height: 20%;
-        width: 60%;
-        background-color: powderblue;
-        }
     "
     )
     .unwrap();
     let theme = use_context::<UseReducerHandle<Theme>>().expect("no ctx found");
     html! {
         <>
-            <nav::rhNav/>
+            <nav::RhNav/>
                   <div class={&style.get_class_name().to_string()}>
                 <article>
             <p class="date">

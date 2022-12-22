@@ -858,6 +858,7 @@ dependencies = [
  "log",
  "patternfly-yew",
  "router",
+ "search",
  "stylist",
  "utils",
  "view",
@@ -902,6 +903,17 @@ name = "scratch"
 version = "1.0.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "9c8132065adcfd6e02db789d9285a0deb2f3fcb04002865ab67d5fb103533898"
+
+[[package]]
+name = "search"
+version = "0.1.0"
+dependencies = [
+ "log",
+ "stylist",
+ "utils",
+ "view",
+ "yew 0.20.0",
+]
 
 [[package]]
 name = "serde"
@@ -1191,10 +1203,12 @@ version = "0.1.0"
 dependencies = [
  "log",
  "patternfly-yew",
+ "router",
  "stylist",
  "utils",
  "wasm-logger",
  "yew 0.20.0",
+ "yew-router",
 ]
 
 [[package]]

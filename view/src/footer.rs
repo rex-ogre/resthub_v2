@@ -9,7 +9,7 @@ pub fn rh_footer() -> Html {
   position: absolute;
   bottom: 25px;
   display:flex;
-  left: 55px;
+  left: 25px;
   /*left: 20px; */
   color: #ABB2B9;
          }

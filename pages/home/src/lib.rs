@@ -1,8 +1,7 @@
 use log::info;
 use stylist::style;
-use view::{footer, nav};
+use view::{footer, nav, post};
 use yew::prelude::*;
-use utils::theme_provider;
 #[function_component(Home)]
 pub fn home() -> Html {
     let style = style!(
@@ -58,6 +57,7 @@ pub fn home() -> Html {
     margin: auto;
     max-width: 1024px;
     padding-left: 20px;
+    flex-wrap: wrap;
       }
 
       .grid-2_article{
@@ -66,6 +66,7 @@ pub fn home() -> Html {
        border-radius: 0.5rem;
        height: 50%;
        display: grid;
+       flex:45%;
        margin-left:25px;
       }       
       .regular_pic {
@@ -100,6 +101,12 @@ pub fn home() -> Html {
     "
     )
     .unwrap();
+    let post = post::Post {
+        img: String::from("https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"),
+        time: String::from("March 05, 2019"),
+        title: String::from("Emoji Support"),
+        content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
+    };
     html! {
         <>
             <nav::RhNav/>
@@ -145,6 +152,7 @@ pub fn home() -> Html {
                       </div>
                       </div>
                     </article>
+                    <post::PostComponent ..post.clone() />
                   </div>
                 </div>
                 <footer::rh_footer/>

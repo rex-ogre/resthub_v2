@@ -53,16 +53,6 @@ pub fn PostComponent(props: &Post) -> Html {
 }
 
 @media screen and (max-width: 600px){
-    .kanban {
-    margin-left:auto;
-    }
-    .big_pic {
-    width:60%;
-    height:auto;
-    }
-    .kanban_meta_data {
-    width:auto;
-    }
     width:100%;
     margin-right:2.5%;
     margin-left:auto;
@@ -74,7 +64,7 @@ pub fn PostComponent(props: &Post) -> Html {
 
     html! {
     <>
-                    <article class={("grid-2_article",{&styles.get_class_name().to_string()})}>
+                    <article class={classes!("grid-2_article",{&styles.get_class_name().to_string()})}>
                       <img class="regular_pic" src={props.img.to_owned()}/>
                       <div class="grid-2_article_metadata">
                       <time>{props.time.to_owned()}</time>

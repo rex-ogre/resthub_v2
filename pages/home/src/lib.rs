@@ -1,6 +1,6 @@
 use log::info;
 use stylist::style;
-use view::{footer, nav, post};
+use view::{footer, kanban, nav, post};
 use yew::prelude::*;
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -9,47 +9,14 @@ pub fn home() -> Html {
         .main_area {
         margin:50px;
         }
-        .big_pic {
-        position:relative;
-        background-size: contain;
-        background-repeat: no-repeat;
-        display: flex;
-        width: 80%;
-        height: 80%;
-        }
+      time {
+      color:green;
+      }
         .main_area {
             padding:  25px;
             margin: 0 auto;
             max-width: 1024px;
         }
-      .kanban {
-          box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
-        position:relative;
-        overflow: hidden;
-        border-radius: 0.5rem;
-        display:flex;
-        width:100%;
-        margin-left:20px;
-      } 
-      .kanban_meta_data {
-        overflow: hidden;
-        width:15%; 
-        flex-direction: column;
-        justify-content: center;
-        display: flex;
-      }
-      .kanban_meta_data * {
-      padding-left: 15px
-      }
-      .kanban_content {
-      padding-left:0px;
-      }
-      time {
-      color:green;
-      }
-      .kanban:hover .big_pic {
-        opacity: 0.5;
-      }
       .grid-2_container{
       display: flex;
     margin: auto;
@@ -58,23 +25,6 @@ pub fn home() -> Html {
     flex-wrap: wrap;
       }
 
-@media screen and (max-width: 600px){
-    .kanban {
-    margin-left:auto;
-    }
-    .big_pic {
-    width:60%;
-    height:auto;
-    }
-    .kanban_meta_data {
-    width:auto;
-    }
-    .grid-2_article{
-    width:100%;
-    margin-right:2.5%;
-    margin-left:auto;
-    }
-}
     "
     )
     .unwrap();
@@ -89,20 +39,7 @@ pub fn home() -> Html {
             <nav::RhNav/>
                   <div class={&style.get_class_name().to_string()}>
                 <div class="main_area">
-                  <article>
-                      <div class="kanban">
-                      <img class="big_pic" src="https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"/>
-                      <div class="kanban_meta_data">
-                      <time>{"March 05, 2019"}</time>
-                      <h2>{"Emoji Support"}</h2>
-                      <div>
-                          <p class="kanban_content">
-                          {"Emoji can be enabled in a Hugo project in a number of ways."}
-                          </p>
-                      </div>
-                      </div>
-                      </div>
-                  </article>
+                <kanban::KanbanComponent ..post.clone() />
                   </div>
                   <div class="grid-2_container">
                     <post::PostComponent ..post.clone() />

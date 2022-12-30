@@ -51,9 +51,7 @@ pub fn home() -> Html {
         opacity: 0.5;
       }
       .grid-2_container{
-      margin-left: 20px;
-    display: flex;
-    margin-left: 25px;
+      display: flex;
     margin: auto;
     max-width: 1024px;
     padding-left: 20px;
@@ -61,13 +59,13 @@ pub fn home() -> Html {
       }
 
       .grid-2_article{
-       box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
-       width: 50%;
-       border-radius: 0.5rem;
-       height: 50%;
-       display: grid;
-       flex:45%;
-       margin-left:25px;
+          box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
+    width: 47.5%;
+    border-radius: 0.5rem;
+    height: 50%;
+    display: grid;
+    margin-left: 2.5%;
+    margin-top: 2%;
       }       
       .regular_pic {
         position:relative;
@@ -75,9 +73,11 @@ pub fn home() -> Html {
         background-repeat: no-repeat;
         display: flex;
         width: 100%;
+        border-radius: 0.5rem;
       }
       .grid-2_article_metadata {
       height: auto;
+      margin-bottom:20px;
       }
       .grid-2_article_metadata * {
       padding-left: 15px;
@@ -97,6 +97,24 @@ pub fn home() -> Html {
       .grid-2_article:hover .regular_pic {
   transition: opacity 0.1s ease-out;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 600px){
+    .kanban {
+    margin-left:auto;
+    }
+    .big_pic {
+    width:60%;
+    height:auto;
+    }
+    .kanban_meta_data {
+    width:auto;
+    }
+    .grid-2_article{
+    width:100%;
+    margin-right:2.5%;
+    margin-left:auto;
+    }
 }
     "
     )

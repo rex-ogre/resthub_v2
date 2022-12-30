@@ -12,23 +12,25 @@ pub struct Post {
 pub fn PostComponent(props: &Post) -> Html {
     let styles = style!(
         r"
-      .grid-2_article{
-       box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
-       width: 50%;
-       border-radius: 0.5rem;
-       height: 50%;
-       display: grid;
-       margin-left:25px;
-       }
+    box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
+    width: 47.5%;
+    border-radius: 0.5rem;
+    height: 50%;
+    display: grid;
+    margin-left: 2.5%;
+    margin-top: 2%;
+
       .regular_pic {
         position:relative;
         background-size: contain;
         background-repeat: no-repeat;
         display: flex;
         width: 100%;
-      }       
+        border-radius: 0.5rem;
+      }
       .grid-2_article_metadata {
       height: auto;
+      margin-bottom:20px;
       }
       .grid-2_article_metadata * {
       padding-left: 15px;
@@ -38,15 +40,33 @@ pub fn PostComponent(props: &Post) -> Html {
         opacity: 0;
         padding-left:0px;
     }
-      .grid-2_article:hover .giu_content {
+      :hover .giu_content {
       height:75px;
       overflow: hidden;
       opacity: 1;
-      transition: opacity 1.1s ease-out;
+  transition: opacity 1.1s ease-out;
+  
      }
-      .grid-2_article:hover .regular_pic {
+      :hover .regular_pic {
   transition: opacity 0.1s ease-out;
   opacity: 0.5;
+}
+
+@media screen and (max-width: 600px){
+    .kanban {
+    margin-left:auto;
+    }
+    .big_pic {
+    width:60%;
+    height:auto;
+    }
+    .kanban_meta_data {
+    width:auto;
+    }
+    width:100%;
+    margin-right:2.5%;
+    margin-left:auto;
+    
 }
         "
     )
@@ -54,8 +74,7 @@ pub fn PostComponent(props: &Post) -> Html {
 
     html! {
     <>
-        <div class={&styles.get_class_name().to_string()}>
-                    <article class="grid-2_article">
+                    <article class={("grid-2_article",{&styles.get_class_name().to_string()})}>
                       <img class="regular_pic" src={props.img.to_owned()}/>
                       <div class="grid-2_article_metadata">
                       <time>{props.time.to_owned()}</time>
@@ -67,7 +86,6 @@ pub fn PostComponent(props: &Post) -> Html {
                       </div>
                       </div>
                     </article>
-                    </div>
                     </>
     }
 }

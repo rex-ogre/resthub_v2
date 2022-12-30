@@ -58,47 +58,6 @@ pub fn home() -> Html {
     flex-wrap: wrap;
       }
 
-      .grid-2_article{
-          box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
-    width: 47.5%;
-    border-radius: 0.5rem;
-    height: 50%;
-    display: grid;
-    margin-left: 2.5%;
-    margin-top: 2%;
-      }       
-      .regular_pic {
-        position:relative;
-        background-size: contain;
-        background-repeat: no-repeat;
-        display: flex;
-        width: 100%;
-        border-radius: 0.5rem;
-      }
-      .grid-2_article_metadata {
-      height: auto;
-      margin-bottom:20px;
-      }
-      .grid-2_article_metadata * {
-      padding-left: 15px;
-      }
-     .giu_content {
-        height:0;
-        opacity: 0;
-        padding-left:0px;
-    }
-      .grid-2_article:hover .giu_content {
-      height:75px;
-      overflow: hidden;
-      opacity: 1;
-  transition: opacity 1.1s ease-out;
-  
-     }
-      .grid-2_article:hover .regular_pic {
-  transition: opacity 0.1s ease-out;
-  opacity: 0.5;
-}
-
 @media screen and (max-width: 600px){
     .kanban {
     margin-left:auto;
@@ -146,30 +105,9 @@ pub fn home() -> Html {
                   </article>
                   </div>
                   <div class="grid-2_container">
-                    <article class="grid-2_article">
-                      <img class="regular_pic" src="https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"/>
-                      <div class="grid-2_article_metadata">
-                      <time>{"March 05, 2019"}</time>
-                      <h2>{"Emoji Support"}</h2>
-                      <div>
-                          <p class="giu_content">
-                          {"Emoji can be enabled in a Hugo project in a number of ways."}
-                          </p>
-                      </div>
-                      </div>
-                    </article>
-                    <article class="grid-2_article">
-                      <img class="regular_pic" src="https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"/>
-                      <div class="grid-2_article_metadata">
-                      <time>{"March 05, 2019"}</time>
-                      <h2>{"Emoji Support"}</h2>
-                      <div>
-                          <p class="giu_content">
-                          {"Emoji can be enabled in a Hugo project in a number of ways."}
-                          </p>
-                      </div>
-                      </div>
-                    </article>
+                    <post::PostComponent ..post.clone() />
+                    <post::PostComponent ..post.clone() />
+                    <post::PostComponent ..post.clone() />
                     <post::PostComponent ..post.clone() />
                   </div>
                 </div>

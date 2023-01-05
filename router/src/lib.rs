@@ -8,5 +8,6 @@ pub enum RootRoutes {
     About,
     #[at("/search")]
     Search,
-    // Compatible with https://github.com/jetli/awesome-yew
+    #[at("/content/")]
+    Content,
 }

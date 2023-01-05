@@ -1,0 +1,40 @@
+# 這是標題1
+
+## 這是標題2
+
+### 這是標題3
+
+sgoekmrgortgvrt
+
+
+
+`Format one word or one line`
+
+    code (4 spaces indent)
+
+* 1
+
+* 2
+
+* 3
+  
+  * 1
+  
+  * 2
+    
+    ```rust
+    
+      這邊是程式碼    
+    
+      let c = String::from("tt");
+    ```
+    
+      ![GITHUB](/Users/chenguanxiong/Desktop/截圖%202022-12-05%20下午1.49.08.png)
+
+> Quote one sentences 
+> 
+> > > Quote two sentences >>
+> > 
+> > Quote two sentences >>>
+> > 
+> > Quote three sentences

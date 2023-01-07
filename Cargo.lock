@@ -125,6 +125,7 @@ name = "content"
 version = "0.1.0"
 dependencies = [
  "log",
+ "pulldown-cmark",
  "stylist",
  "utils",
  "view",

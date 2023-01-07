@@ -1,4 +1,5 @@
 use log::info;
+use pulldown_cmark::{html, Options, Parser};
 use std::{env, fs};
 use stylist::style;
 use utils::theme_provider::Theme;
@@ -26,7 +27,15 @@ pub fn content() -> Html {
     .unwrap();
 
     let t = std::include_str!("../../../post/test.md");
-    log::info!("{}", t);
+    let mut options = Options::empty();
+    options.insert(Options::ENABLE_STRIKETHROUGH);
+    let parser = Parser::new_ext(t, options);
+
+    // Write to String buffer.
+    let mut html_output = String::new();
+    html::push_html(&mut html_output, parser);
+
+    log::info!("{}", html_output);
     html! {
         <>
             <nav::RhNav/>

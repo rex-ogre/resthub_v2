@@ -1,10 +1,11 @@
 use log::info;
+use std::{env, fs};
 use stylist::style;
 use utils::theme_provider::Theme;
 use view::{footer, nav};
 use yew::prelude::*;
-#[function_component(Search)]
-pub fn search() -> Html {
+#[function_component(Content)]
+pub fn content() -> Html {
     let style = style!(
         r"
         .title {
@@ -23,12 +24,15 @@ pub fn search() -> Html {
     "
     )
     .unwrap();
+
+    let t = std::include_str!("../../../post/test.md");
+    log::info!("{}", t);
     html! {
         <>
             <nav::RhNav/>
                   <div class={&style.get_class_name().to_string()}>
                 <article>
-                <input class="search__input" id="searchInput" placeholder="Search contents..."/>
+                <p>{t}</p>
                  </article>
                 </div>
 

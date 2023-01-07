@@ -1,4 +1,5 @@
 use about::About;
+use content::Content;
 use home::Home;
 use router::RootRoutes;
 use search::Search;
@@ -11,7 +12,7 @@ fn switch(routes: RootRoutes) -> Html {
         RootRoutes::About => html! { <About /> },
         RootRoutes::Root => html! {<Home/>},
         RootRoutes::Search => html! {<Search/>},
-        _ => html! {"no shit"},
+        _ => html! {<Content/>},
     }
 }
 

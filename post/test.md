@@ -6,8 +6,6 @@
 
 sgoekmrgortgvrt
 
-
-
 `Format one word or one line`
 
     code (4 spaces indent)
@@ -23,9 +21,10 @@ sgoekmrgortgvrt
   * 2
     
     ```rust
-    
       這邊是程式碼    
-    
+     let inner_html = html_output.clone();                                                                                                 
+     let node_ref = node_ref.clone();                                                                                                      
+           
       let c = String::from("tt");
     ```
     

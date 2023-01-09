@@ -50,7 +50,7 @@ pub fn about() -> Html {
              {"09. April 2014" }
             </p>
             <h1 class="title">
-            {"About Rex"}
+            {"About "}
             </h1>
                          <div class="imgfornow">
                 </div>

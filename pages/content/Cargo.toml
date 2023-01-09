@@ -13,3 +13,4 @@ log = "0.4.17"
 stylist = {version = "0.10", features = ["yew_integration"]}
 view = { path = "../../view"} 
 utils = { path = "../../utils"}
+web-sys = "0.3.60"

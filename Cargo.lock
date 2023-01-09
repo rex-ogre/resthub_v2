@@ -129,6 +129,7 @@ dependencies = [
  "stylist",
  "utils",
  "view",
+ "web-sys",
  "yew 0.20.0",
 ]
 
@@ -898,6 +899,7 @@ dependencies = [
  "utils",
  "view",
  "wasm-logger",
+ "web-sys",
  "yew 0.20.0",
  "yew-router",
 ]

@@ -34,6 +34,7 @@ pub fn home() -> Html {
         title: String::from("Emoji Support"),
         content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
     };
+
     html! {
         <>
             <nav::RhNav/>

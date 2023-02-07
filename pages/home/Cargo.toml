@@ -10,4 +10,3 @@ yew = { version = "0.20.0", features = ["csr"] }
 log = "0.4.17"
 stylist = {version = "0.10", features = ["yew_integration"]}
 view = { path = "../../view"} 
-utils = { path = "../../utils"}

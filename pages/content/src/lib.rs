@@ -6,7 +6,7 @@ use utils::theme_provider::Theme;
 use view::{footer, nav};
 use yew::prelude::*;
 use web_sys::Element;
-
+use std::ffi;
 #[function_component(Content)]
 pub fn content() -> Html {
     let style = style!(
@@ -27,6 +27,8 @@ pub fn content() -> Html {
     "
     )
     .unwrap();
+
+
 
     let t = std::include_str!("../../../post/test.md");
     let mut options = Options::empty();
@@ -62,7 +64,6 @@ pub fn post() -> Html {
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);
     let parser = Parser::new_ext(t, options);
-
     // Write to String buffer.
     let mut html_output = String::new();
     html::push_html(&mut html_output, parser);

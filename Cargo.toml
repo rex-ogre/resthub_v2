@@ -22,16 +22,10 @@ home = { path = "pages/home"}
 content = { path = "pages/content"}
 search = { path = "pages/search"}
 web-sys = "0.3.60"
-tokio = { version = "1.0", features = ["full"] }
-tower = { version = "0.4", features = ["util"] }
-tower-http = { version = "0.3.0", features = ["fs", "trace"] }
-tracing = "0.1"
-tracing-subscriber = { version = "0.3", features = ["env-filter"] }
-axum = "0.6.4"
-axum-extra = {  version = "0.4.2",features = ["spa"] }
 [workspace]
 
 members = [
+    "backend",
     "view",
     "router",
     "pages/about",	

@@ -8,6 +8,9 @@ edition = "2021"
 [dependencies]
 axum = "0.6.6"
 axum-extra = { version = "0.5.0", features = ["spa"] }
+glob = "0.3.1"
+pulldown-cmark = "0.9.2"
+serde_json = "1.0.93"
 tokio = { version = "1.0", features = ["full"] }
 tower = { version = "0.4", features = ["util"] }
 tower-http = { version = "0.3.0", features = ["fs", "trace"] }

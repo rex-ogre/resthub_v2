@@ -46,7 +46,7 @@ pub fn home() -> Html {
         .send()
         .await
         .unwrap();
-
+        log::info!("{:?}", req.text().await.unwrap());
         log::info!("看資料{:?}", req);
     });
     html! {

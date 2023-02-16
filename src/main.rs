@@ -6,6 +6,7 @@ mod routes;
 pub fn app() -> Html {
     html! {
             <RouteOutlet />
+        
     }
 }
 fn main() {

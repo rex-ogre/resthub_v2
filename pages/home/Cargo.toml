@@ -10,3 +10,8 @@ yew = { version = "0.20.0", features = ["csr"] }
 log = "0.4.17"
 stylist = {version = "0.10", features = ["yew_integration"]}
 view = { path = "../../view"} 
+web-sys = "0.3.61"
+gloo-net = { version = "0.2.6", features = ["http"]}
+wasm-bindgen-futures = "0.4.34"
+
+

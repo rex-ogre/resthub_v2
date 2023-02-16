@@ -1,11 +1,12 @@
 use axum::{
-    http::{Request, StatusCode},
+    http::{HeaderValue, Method, StatusCode},
     response::IntoResponse,
     routing::{get, get_service},
     Json, Router,
 };
 use glob::glob;
 use std::{io, net::SocketAddr};
+use tower_http::cors::{Any, CorsLayer};
 use tower_http::{
     services::{ServeDir, ServeFile},
     trace::TraceLayer,
@@ -31,6 +32,11 @@ fn using_serve_dir_with_assets_fallback() -> Router {
         .route("/foo", get(|| async { "Hi from /foo" }))
         .nest_service("/assets", serve_dir.clone())
         .route("/json", get(jsons))
+        .layer(
+            CorsLayer::new()
+                .allow_origin("http://127.0.0.1:8080".parse::<HeaderValue>().unwrap())
+                .allow_methods([Method::GET]),
+        )
         .fallback_service(serve_dir)
 }
 async fn jsons() -> Json<serde_json::Value> {

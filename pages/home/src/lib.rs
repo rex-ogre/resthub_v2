@@ -1,6 +1,9 @@
+use gloo_net::http::Request;
 use log::info;
+use std::collections::HashMap;
 use stylist::style;
 use view::{footer, kanban, nav, post};
+use wasm_bindgen_futures::spawn_local;
 use yew::prelude::*;
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -34,7 +37,18 @@ pub fn home() -> Html {
         title: String::from("Emoji Support"),
         content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
     };
+    log::info!("抓資料");
+    spawn_local(async move {
+        let req = Request::new(
+            "
+            http://127.0.0.1:3002/json",
+        )
+        .send()
+        .await
+        .unwrap();
 
+        log::info!("看資料{:?}", req);
+    });
     html! {
         <>
             <nav::RhNav/>

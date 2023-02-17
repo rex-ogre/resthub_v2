@@ -3,8 +3,8 @@ use log::info;
 use std::collections::HashMap;
 use stylist::style;
 use view::{footer, kanban, nav, post};
-use wasm_bindgen_futures::spawn_local;
-use yew::prelude::*;
+use wasm_bindgen_futures::{future_to_promise, spawn_local};
+use yew::{prelude::*, suspense::use_future};
 #[function_component(Home)]
 pub fn home() -> Html {
     let style = style!(
@@ -31,24 +31,37 @@ pub fn home() -> Html {
     "
     )
     .unwrap();
+    let videos = use_state(|| String::from(""));
+    {
+        let videos = videos.clone();
+        use_effect_with_deps(
+            move |_| {
+                let videos = videos.clone();
+                wasm_bindgen_futures::spawn_local(async move {
+                    let fetched_videos: String = Request::new(
+                        "
+            http://127.0.0.1:3002/json",
+                    )
+                    .send()
+                    .await
+                    .unwrap()
+                    .text()
+                    .await
+                    .unwrap();
+
+                    videos.set(fetched_videos);
+                });
+                || ()
+            },
+            (),
+        );
+    }
     let post = post::Post {
         img: String::from("https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"),
         time: String::from("March 05, 2019"),
-        title: String::from("Emoji Support"),
+        title: videos.to_string(),
         content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
     };
-    log::info!("抓資料");
-    spawn_local(async move {
-        let req = Request::new(
-            "
-            http://127.0.0.1:3002/json",
-        )
-        .send()
-        .await
-        .unwrap();
-        log::info!("{:?}", req.text().await.unwrap());
-        log::info!("看資料{:?}", req);
-    });
     html! {
         <>
             <nav::RhNav/>
@@ -66,4 +79,15 @@ pub fn home() -> Html {
                 <footer::rh_footer/>
             </>
     }
+}
+pub async fn req() -> Result<String, gloo_net::Error> {
+    let req = Request::new(
+        "
+            http://127.0.0.1:3002/json",
+    )
+    .send()
+    .await
+    .unwrap();
+
+    return req.text().await;
 }

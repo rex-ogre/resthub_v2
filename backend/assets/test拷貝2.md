@@ -1,4 +1,12 @@
-# 這是標題1
+# 如果用swift 打造驚天地的遊戲
+
+
+
+###### March 05, 2019
+
+---
+
+word
 
 ## 這是標題2
 
@@ -10,6 +18,7 @@ sgoekmrgortgvrt
 
     code (4 spaces indent)
 
+---
 * 1
 
 * 2
@@ -24,7 +33,7 @@ sgoekmrgortgvrt
       這邊是程式碼    
      let inner_html = html_output.clone();                                                                                                 
      let node_ref = node_ref.clone();                                                                                                      
-           
+    
       let c = String::from("tt");
     ```
     

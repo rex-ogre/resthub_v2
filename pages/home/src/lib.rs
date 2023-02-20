@@ -37,15 +37,13 @@ pub fn home() -> Html {
         use_effect_with_deps(
             move |_| {
                 wasm_bindgen_futures::spawn_local(async move {
-                    let fetched_videos: String = Request::new(
-                        "http://127.0.0.1:3002/json",
-                    )
-                    .send()
-                    .await
-                    .unwrap()
-                    .text()
-                    .await
-                    .unwrap();
+                    let fetched_videos: String = Request::new("http://127.0.0.1:3002/json")
+                        .send()
+                        .await
+                        .unwrap()
+                        .text()
+                        .await
+                        .unwrap();
 
                     videos.set(fetched_videos);
                 });

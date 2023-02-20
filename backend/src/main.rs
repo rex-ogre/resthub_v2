@@ -4,16 +4,16 @@ use axum::{
     routing::{get, get_service},
     Json, Router,
 };
+use glob::glob;
 use serde::{Deserialize, Serialize};
 use serde_json::Result;
-use glob::glob;
 use std::{io, net::SocketAddr};
-use tower_http::cors::{ CorsLayer};
+use tower_http::cors::CorsLayer;
 use tower_http::{
     services::{ServeDir, ServeFile},
     trace::TraceLayer,
 };
-use tracing_subscriber::{util::SubscriberInitExt};
+use tracing_subscriber::util::SubscriberInitExt;
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -49,13 +49,54 @@ async fn jsons() -> Json<serde_json::Value> {
                 let parser = pulldown_cmark::Parser::new(&markdown_input);
                 let mut html_output = String::new();
                 pulldown_cmark::html::push_html(&mut html_output, parser);
-                let title_index = vec![html_output.find(">").unwrap() ,html_output.find("</h1>").unwrap()];
+                let title_index = vec![
+                    html_output.find(">").unwrap() + 1,
+                    html_output.find("</h1>").unwrap(),
+                ];
+                let data_index = vec![
+                    html_output.find("<h6>").unwrap() + 4,
+                    html_output.find("</h6>").unwrap(),
+                ];
+                let content_index = vec![html_output.find("<hr />").unwrap(), html_output.len()];
+                let content_second_index = html_output[content_index[0] + 5..content_index[1]]
+                    .find("<hr />")
+                    .to_owned()
+                    .unwrap();
+
+                let content_slice = &html_output[content_index[0]..content_second_index]
+                    .replace("<p>", "")
+                    .replace("<hr />", "")
+                    .replace("\n", "")
+                    .replace("</p>", "")
+                    .replace("<em>", "")
+                    .replace("</em>", "")
+                    .replace("<strong>", "")
+                    .replace("</strong>", "")
+                    .replace("<code>", "")
+                    .replace("</code>", "")
+                    .replace("<pre>", "")
+                    .replace("</pre>", "")
+                    .replace("<blockquote>", "")
+                    .replace("</blockquote>", "")
+                    .replace("<h1>", "")
+                    .replace("</h1>", "")
+                    .replace("<h2>", "")
+                    .replace("</h2>", "")
+                    .replace("<h3>", "")
+                    .replace("</h3>", "")
+                    .replace("<h4>", "")
+                    .replace("</h4>", "")
+                    .replace("<h5>", "")
+                    .replace("</h5>", "")
+                    .replace("<h6>", "")
+                    .replace("</h6>", "");
+
                 tracing::debug!("{:?}", path.display());
-                tracing::debug!("{:?}",title_index);
-                tracing::debug!("{:?}",&html_output);
-                tracing::debug!("{:?}",&html_output[title_index[0]..title_index[1]]);
+                tracing::debug!("{:?}", &html_output);
+                //tracing::debug!("{:?}", &html_output[content_index[0]..content_index[1]]);
+                tracing::debug!("這是slice{:?}", content_slice);
             }
-            Err(e) => tracing::debug!("{:?}", e),
+            Err(e) => tracing::debug!("錯誤{:?}", e),
         }
     }
     Json(serde_json::json!({"hello":"axum.rs"}))
@@ -79,5 +120,5 @@ struct Post {
     filename: String,
     date: String,
     title: String,
-    info: String
+    info: String,
 }

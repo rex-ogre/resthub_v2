@@ -4,15 +4,16 @@ use axum::{
     routing::{get, get_service},
     Json, Router,
 };
+use serde::{Deserialize, Serialize};
+use serde_json::Result;
 use glob::glob;
 use std::{io, net::SocketAddr};
-use tower_http::cors::{Any, CorsLayer};
+use tower_http::cors::{ CorsLayer};
 use tower_http::{
     services::{ServeDir, ServeFile},
     trace::TraceLayer,
 };
-use tracing::{event, Level};
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+use tracing_subscriber::{util::SubscriberInitExt};
 #[tokio::main]
 async fn main() {
     tracing_subscriber::fmt()
@@ -48,8 +49,11 @@ async fn jsons() -> Json<serde_json::Value> {
                 let parser = pulldown_cmark::Parser::new(&markdown_input);
                 let mut html_output = String::new();
                 pulldown_cmark::html::push_html(&mut html_output, parser);
+                let title_index = vec![html_output.find(">").unwrap() ,html_output.find("</h1>").unwrap()];
                 tracing::debug!("{:?}", path.display());
-                tracing::debug!("{:?}", &html_output);
+                tracing::debug!("{:?}",title_index);
+                tracing::debug!("{:?}",&html_output);
+                tracing::debug!("{:?}",&html_output[title_index[0]..title_index[1]]);
             }
             Err(e) => tracing::debug!("{:?}", e),
         }
@@ -68,4 +72,12 @@ async fn serve(app: Router, port: u16) {
         .serve(app.layer(TraceLayer::new_for_http()).into_make_service())
         .await
         .unwrap();
+}
+
+#[derive(Serialize, Deserialize, Debug)]
+struct Post {
+    filename: String,
+    date: String,
+    title: String,
+    info: String
 }

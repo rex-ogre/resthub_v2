@@ -36,11 +36,9 @@ pub fn home() -> Html {
         let videos = videos.clone();
         use_effect_with_deps(
             move |_| {
-                let videos = videos.clone();
                 wasm_bindgen_futures::spawn_local(async move {
                     let fetched_videos: String = Request::new(
-                        "
-            http://127.0.0.1:3002/json",
+                        "http://127.0.0.1:3002/json",
                     )
                     .send()
                     .await
@@ -79,15 +77,4 @@ pub fn home() -> Html {
                 <footer::rh_footer/>
             </>
     }
-}
-pub async fn req() -> Result<String, gloo_net::Error> {
-    let req = Request::new(
-        "
-            http://127.0.0.1:3002/json",
-    )
-    .send()
-    .await
-    .unwrap();
-
-    return req.text().await;
 }

@@ -2,14 +2,14 @@ use stylist::style;
 use yew::prelude::*;
 
 #[derive(Clone, PartialEq, Properties)]
-pub struct Post {
+pub struct PostView {
     pub img: String,
     pub time: String,
     pub title: String,
     pub content: String,
 }
 #[function_component]
-pub fn PostComponent(props: &Post) -> Html {
+pub fn PostComponent(props: &PostView) -> Html {
     let styles = style!(
         r"
     box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);

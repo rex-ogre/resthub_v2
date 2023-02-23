@@ -1,8 +1,8 @@
-pub use crate::post::Post;
+pub use crate::post::PostView;
 use stylist::style;
 use yew::prelude::*;
 #[function_component]
-pub fn KanbanComponent(props: &Post) -> Html {
+pub fn KanbanComponent(props: &PostView) -> Html {
     let style = style!(
         r"
         .big_pic {

@@ -1,5 +1,4 @@
 use routes::RouteOutlet;
-use view::nav;
 use yew::prelude::*;
 mod routes;
 #[function_component(App)]

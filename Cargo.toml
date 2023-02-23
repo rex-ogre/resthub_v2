@@ -21,6 +21,7 @@ utils = { path = "utils"}
 home = { path = "pages/home"}
 content = { path = "pages/content"}
 search = { path = "pages/search"}
+model = { path = "model"}
 web-sys = "0.3.60"
 [workspace]
 
@@ -30,5 +31,6 @@ members = [
     "router",
     "pages/about",	
     "utils",
-    "pages/home"
+    "pages/home",
+    "model"
 ]

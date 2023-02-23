@@ -1,10 +1,13 @@
 use gloo_net::http::Request;
 use log::info;
-use std::collections::HashMap;
+use model::post::Post;
+use serde_json::json;
+use std::{collections::HashMap, iter::Map};
 use stylist::style;
 use view::{footer, kanban, nav, post};
 use wasm_bindgen_futures::{future_to_promise, spawn_local};
 use yew::{prelude::*, suspense::use_future};
+
 #[function_component(Home)]
 pub fn home() -> Html {
     let style = style!(
@@ -31,31 +34,35 @@ pub fn home() -> Html {
     "
     )
     .unwrap();
-    let videos = use_state(|| String::from(""));
+    let data = use_state(|| Vec::<Post>::new());
     {
-        let videos = videos.clone();
+        let data = data.clone();
         use_effect_with_deps(
             move |_| {
                 wasm_bindgen_futures::spawn_local(async move {
-                    let fetched_videos: String = Request::new("http://127.0.0.1:3002/json")
+                    let fetched_data: Vec<Post> = Request::new("http://127.0.0.1:3002/json")
                         .send()
                         .await
                         .unwrap()
-                        .text()
+                        .json()
                         .await
                         .unwrap();
 
-                    videos.set(fetched_videos);
+                    log::info!("{:?}", &fetched_data);
+                    let p: Vec<Post> =
+                        serde_json::from_value(json!(fetched_data)).expect("parse failed");
+                    log::info!("{:?}", p);
+                    data.set(fetched_data);
                 });
                 || ()
             },
             (),
         );
     }
-    let post = post::Post {
+    let post = post::PostView {
         img: String::from("https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"),
         time: String::from("March 05, 2019"),
-        title: videos.to_string(),
+        title: String::from("rkfre"),
         content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
     };
     html! {

@@ -1,7 +1,5 @@
 # 如果用swift 打造驚天地的遊戲
 
-
-
 ###### March 05, 2019
 
 ---
@@ -19,6 +17,9 @@ sgoekmrgortgvrt
     code (4 spaces indent)
 
 ---
+
+![image](https://gitlab.com/uploads/-/system/project/avatar/31963107/rust-code-server.png?width=640)
+
 * 1
 
 * 2
@@ -37,7 +38,6 @@ sgoekmrgortgvrt
       let c = String::from("tt");
     ```
     
-      ![GITHUB](/Users/chenguanxiong/Desktop/截圖%202022-12-05%20下午1.49.08.png)
 
 > Quote one sentences 
 > 

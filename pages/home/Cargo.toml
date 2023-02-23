@@ -13,5 +13,6 @@ view = { path = "../../view"}
 web-sys = "0.3.61"
 gloo-net = { version = "0.2.6", features = ["http"]}
 wasm-bindgen-futures = "0.4.34"
-
-
+serde = {version = "1.0.152", features = ["derive"] }
+model = { path = "../../model"}
+serde_json = "1.0"

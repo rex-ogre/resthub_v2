@@ -23,15 +23,11 @@ async fn main() {
 }
 
 fn using_serve_dir_with_assets_fallback() -> Router {
-    // for example `ServeDir` allows setting a fallback if an asset is not found
-    // so with this `GET /assets/doesnt-exist.jpg` will return `index.html`
-    // rather than a 404
     let serve_dir = ServeDir::new("assets").not_found_service(ServeFile::new("assets/index.html"));
     let serve_dir = get_service(serve_dir).handle_error(handle_error);
 
     Router::new()
         .route("/foo", get(|| async { "Hi from /foo" }))
-        .nest_service("/assets", serve_dir.clone())
         .route("/json", get(jsons))
         .layer(
             CorsLayer::new()
@@ -42,64 +38,26 @@ fn using_serve_dir_with_assets_fallback() -> Router {
 }
 async fn jsons() -> Json<serde_json::Value> {
     tracing::debug!("開始掃檔案");
+    let mut post_list: Vec<Post> = Vec::new();
     for entry in glob("../backend/assets/*.md").expect("Failed to read glob pattern") {
         match entry {
             Ok(path) => {
+                path.file_name().unwrap().to_str().unwrap();
                 let markdown_input = std::fs::read_to_string(&path).unwrap();
                 let parser = pulldown_cmark::Parser::new(&markdown_input);
                 let mut html_output = String::new();
                 pulldown_cmark::html::push_html(&mut html_output, parser);
-                let title_index = vec![
-                    html_output.find(">").unwrap() + 1,
-                    html_output.find("</h1>").unwrap(),
-                ];
-                let data_index = vec![
-                    html_output.find("<h6>").unwrap() + 4,
-                    html_output.find("</h6>").unwrap(),
-                ];
-                let content_index = vec![html_output.find("<hr />").unwrap(), html_output.len()];
-                let content_second_index = html_output[content_index[0] + 5..content_index[1]]
-                    .find("<hr />")
-                    .to_owned()
-                    .unwrap();
-
-                let content_slice = &html_output[content_index[0]..content_second_index]
-                    .replace("<p>", "")
-                    .replace("<hr />", "")
-                    .replace("\n", "")
-                    .replace("</p>", "")
-                    .replace("<em>", "")
-                    .replace("</em>", "")
-                    .replace("<strong>", "")
-                    .replace("</strong>", "")
-                    .replace("<code>", "")
-                    .replace("</code>", "")
-                    .replace("<pre>", "")
-                    .replace("</pre>", "")
-                    .replace("<blockquote>", "")
-                    .replace("</blockquote>", "")
-                    .replace("<h1>", "")
-                    .replace("</h1>", "")
-                    .replace("<h2>", "")
-                    .replace("</h2>", "")
-                    .replace("<h3>", "")
-                    .replace("</h3>", "")
-                    .replace("<h4>", "")
-                    .replace("</h4>", "")
-                    .replace("<h5>", "")
-                    .replace("</h5>", "")
-                    .replace("<h6>", "")
-                    .replace("</h6>", "");
-
-                tracing::debug!("{:?}", path.display());
-                tracing::debug!("{:?}", &html_output);
+                let post = Post::new(&html_output, &path.file_name().unwrap().to_str().unwrap());
+                //tracing::debug!("{:?}", path.display());
+                //tracing::debug!("{:?}", &html_output);
                 //tracing::debug!("{:?}", &html_output[content_index[0]..content_index[1]]);
-                tracing::debug!("這是slice{:?}", content_slice);
+                post_list.push(post.clone());
+                tracing::debug!("{:?}", post);
             }
             Err(e) => tracing::debug!("錯誤{:?}", e),
         }
     }
-    Json(serde_json::json!({"hello":"axum.rs"}))
+    Json(serde_json::json!(post_list))
 }
 
 async fn handle_error(_err: io::Error) -> impl IntoResponse {
@@ -115,10 +73,79 @@ async fn serve(app: Router, port: u16) {
         .unwrap();
 }
 
-#[derive(Serialize, Deserialize, Debug)]
+#[derive(Serialize, Deserialize, Debug, Clone)]
 struct Post {
     filename: String,
     date: String,
     title: String,
     info: String,
+}
+impl Post {
+    pub fn new(content: &str, filename: &str) -> Self {
+        let date_result = content.find("<h6>");
+        let _date: String = match date_result {
+            Some(_) => content
+                [content.find("<h6>").expect("no date data") + 4..content.find("</h6>").unwrap()]
+                .to_string(),
+
+            None => String::from("no time data"),
+        };
+
+        let _title: String = match date_result {
+            Some(_) => {
+                content[content.find(">").unwrap() + 1..content.find("</h1>").unwrap()].to_string()
+            }
+            None => String::from("no title"),
+        };
+
+        let _content_index = content.find("<hr />");
+        let _content_slice = match _content_index {
+            Some(first) => {
+                let _content_second_index =
+                    content[first + 7..content.len()].find("<hr />").to_owned();
+
+                match _content_second_index {
+                    Some(sec) => {
+                        let _content_slice = content[first..sec + first]
+                            .replace("<p>", "")
+                            .replace("<hr />", "")
+                            .replace("\n", "")
+                            .replace("</p>", "")
+                            .replace("<em>", "")
+                            .replace("</em>", "")
+                            .replace("<strong>", "")
+                            .replace("</strong>", "")
+                            .replace("<code>", "")
+                            .replace("</code>", "")
+                            .replace("<pre>", "")
+                            .replace("</pre>", "")
+                            .replace("<blockquote>", "")
+                            .replace("</blockquote>", "")
+                            .replace("<h1>", "")
+                            .replace("</h1>", "")
+                            .replace("<h2>", "")
+                            .replace("</h2>", "")
+                            .replace("<h3>", "")
+                            .replace("</h3>", "")
+                            .replace("<h4>", "")
+                            .replace("</h4>", "")
+                            .replace("<h5>", "")
+                            .replace("</h5>", "")
+                            .replace("<h6>", "")
+                            .replace("</h6>", "");
+                        _content_slice
+                    }
+                    None => String::from("no content"),
+                }
+            }
+            None => String::from("no content"),
+        };
+
+        Post {
+            filename: filename.to_string(),
+            date: _date,
+            title: _title,
+            info: _content_slice,
+        }
+    }
 }

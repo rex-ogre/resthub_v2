@@ -11,8 +11,8 @@ pub fn KanbanComponent(props: &PostView) -> Html {
         background-repeat: no-repeat;
         display: flex;
         width: 80%;
-        height: 80%;
-        }
+        height: 300px;
+          object-fit: cover;}
       .kanban {
           box-shadow: 0 0.5rem 2rem rgb(0 0 0 / 12%);
         position:relative;

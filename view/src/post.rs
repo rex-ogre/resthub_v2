@@ -65,7 +65,7 @@ pub fn PostComponent(props: &PostView) -> Html {
     html! {
     <>
                     <article class={classes!("grid-2_article",{&styles.get_class_name().to_string()})}>
-                      <img class="regular_pic" src={props.img.to_owned()}/>
+                      <img width="300" height="300" class="regular_pic" src={props.img.to_owned()}/>
                       <div class="grid-2_article_metadata">
                       <time>{props.time.to_owned()}</time>
                       <h2>{props.title.to_owned()}</h2>

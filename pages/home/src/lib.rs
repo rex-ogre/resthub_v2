@@ -60,23 +60,50 @@ pub fn home() -> Html {
         );
     }
     let post = post::PostView {
-        img: String::from("https://live.staticflickr.com/65535/52573392542_eeb51ca196_4k.jpg"),
+        img: String::from("https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2023/02/24/realtime/20285625.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600&w=400&nt=1"),
         time: String::from("March 05, 2019"),
-        title: String::from("rkfre"),
+        title: String::from("title"),
         content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
     };
+
     html! {
         <>
             <nav::RhNav/>
                   <div class={&style.get_class_name().to_string()}>
                 <div class="main_area">
-                <kanban::KanbanComponent ..post.clone() />
+                   {for data.first().map(|comment| {
+                        let c = comment.clone();
+                        html! {
+                            <kanban::KanbanComponent ..
+                                post::PostView {
+                                    img: c.image,
+                                    time: c.date,
+                                    title: c.title,
+                                    content: c.info,
+                                }
+                                 />
+                        }
+                    })}
+
                   </div>
                   <div class="grid-2_container">
-                    <post::PostComponent ..post.clone() />
-                    <post::PostComponent ..post.clone() />
-                    <post::PostComponent ..post.clone() />
-                    <post::PostComponent ..post.clone() />
+                   {
+                       for data.iter().map(|comment| {
+                           if comment == data.first().unwrap() {
+                               return html!{};
+                           }
+                        let c = comment.clone();
+                        html! {
+                            <post::PostComponent ..
+                                post::PostView {
+                                    img: c.image,
+                                    time: c.date,
+                                    title: c.title,
+                                    content: c.info,
+                                }
+                                 />
+                        }
+                    })}
                   </div>
                 </div>
                 <footer::rh_footer/>

@@ -48,11 +48,12 @@ async fn jsons() -> Json<serde_json::Value> {
                 let parser = pulldown_cmark::Parser::new(&markdown_input);
                 let mut html_output = String::new();
                 pulldown_cmark::html::push_html(&mut html_output, parser);
-                let post = Post::new(&html_output, &path.file_name().unwrap().to_str().unwrap());
-                //tracing::debug!("{:?}", path.display());
-                //tracing::debug!("{:?}", &html_output);
-                //tracing::debug!("{:?}", &html_output[content_index[0]..content_index[1]]);
+                let post = Post::new(
+                    &markdown_input,
+                    &path.file_name().unwrap().to_str().unwrap(),
+                );
                 post_list.push(post.clone());
+                tracing::debug!("{:?}", markdown_input);
                 tracing::debug!("{:?}", post);
             }
             Err(e) => tracing::debug!("錯誤{:?}", e),

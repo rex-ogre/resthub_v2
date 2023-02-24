@@ -18,7 +18,7 @@ sgoekmrgortgvrt
 
 ---
 
-![image](https://gitlab.com/uploads/-/system/project/avatar/31963107/rust-code-server.png?width=64)
+![image](https://s.yimg.com/os/creatr-uploaded-images/2023-02/dbc82df0-b3c2-11ed-bde7-461b718d6681)
 
 * 1
 

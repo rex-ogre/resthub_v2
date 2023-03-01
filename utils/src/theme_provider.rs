@@ -60,7 +60,7 @@ pub fn set_theme(theme: bool) {
     };
 }
 
-pub fn mount_on_dom(is_dark: bool) {
+pub fn mount_on_theme_dom(is_dark: bool) {
     let window = window().expect("should have window");
     let document = window.document().expect("should have document");
     let arr = js_sys::Array::new_with_length(1);

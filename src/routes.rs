@@ -4,7 +4,7 @@ use home::Home;
 use router::RootRoutes;
 use search::Search;
 use std::rc::Rc;
-use utils::theme_provider::{get_theme_from_storage, use_prefered_dark, Theme};
+use utils::theme_provider::{get_theme_from_storage, Theme};
 use yew::prelude::*;
 use yew_router::prelude::*;
 fn switch(routes: RootRoutes) -> Html {

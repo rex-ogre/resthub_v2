@@ -18,7 +18,7 @@ impl Reducible for LangRrovider {
 
 impl LangRrovider {
     pub fn from_storage(local_storage: String) -> LangRrovider {
-        if local_storage == "en" {
+        if local_storage == "eng" {
             LangRrovider { is_eng: true }
         } else {
             LangRrovider { is_eng: false }
@@ -41,6 +41,7 @@ pub fn get_lang_from_storage() -> LangRrovider {
         }
         None => {
             info!("no default language");
+            local_storage.set_item(LANG_KEY, "eng").unwrap();
             LangRrovider { is_eng: true }
         }
     }
@@ -49,8 +50,8 @@ pub fn set_lang(lang: bool) {
     let local_storage = web_sys::window().unwrap().local_storage().unwrap().unwrap();
     info!("set_lang {}", lang);
     match lang {
-        true => local_storage.set_item(LANG_KEY, "dark").unwrap(),
-        false => local_storage.set_item(LANG_KEY, "light").unwrap(),
+        true => local_storage.set_item(LANG_KEY, "eng").unwrap(),
+        false => local_storage.set_item(LANG_KEY, "cn").unwrap(),
     };
 }
 pub fn mount_on_lang_dom(is_eng: bool) {

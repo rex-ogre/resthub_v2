@@ -219,7 +219,7 @@
 	 align-items: center;
 	 justify-content: space-between;
 }
- body input.test[type=checkbox] {
+ body input.switch[type=checkbox] {
 	 height: 0;
 	 width: 0;
 	 visibility: hidden;
@@ -245,13 +245,13 @@
 	 border-radius: 90px;
 	 transition: 0.3s;
 }
- body input.test:checked + label.tl {
+ body input.switch:checked + label.tl {
 	 background: #6f42c1;
 }
  body label.tl:active:after {
 	 width: 32.5px;
 }
- body input.test:checked + label.tl:after {
+ body input.switch:checked + label.tl:after {
 	 left: 100%;
 	 transform: translateX(-100%);
 }

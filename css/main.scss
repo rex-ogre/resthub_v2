@@ -217,7 +217,7 @@ footer {
     align-items: center;
     justify-content: space-between;
         }
-input.test[type=checkbox]{
+input.switch[type=checkbox]{
 	height: 0;
 	width: 0;
 	visibility: hidden;
@@ -244,14 +244,14 @@ label.tl:after {
 	border-radius: 90px;
 	transition: 0.3s;
 }
-input.test:checked + label.tl {
+input.switch:checked + label.tl {
 	background: #6f42c1;;
 }
 
 label.tl:active:after {
 	width: 32.5px;
 }
-input.test:checked + label.tl:after {
+input.switch:checked + label.tl:after {
 	left: 100%;
 	transform: translateX(-100%);
 }
@@ -259,6 +259,15 @@ div.toggle {
   display:flex;
   position: absolute;
   top:83%;
+  left:70%;
+  height: 13%;
+  width:80%;
+  transform: translate(-50%, -50%);
+}
+div.toggle2 {
+  display:flex;
+  position: absolute;
+  top:90%;
   left:70%;
   height: 13%;
   width:80%;

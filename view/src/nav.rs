@@ -15,13 +15,14 @@ pub fn RhNav() -> Html {
         })
     };
     let lang_state = use_context::<UseReducerHandle<LangRrovider>>().unwrap();
-    let switch_lang = lang_state.is_eng;
+    let lang_switch_state = lang_state.is_eng;
     let lang_onclick: Callback<MouseEvent> = {
         Callback::from(move |_| {
             lang_state.dispatch(!lang_state.is_eng);
             set_lang(!lang_state.is_eng);
         })
     };
+    mount_on_lang_dom(lang_switch_state);
     theme_provider::mount_on_theme_dom(switch_state);
     html! {
         <>
@@ -39,17 +40,18 @@ pub fn RhNav() -> Html {
         </ul>
         <div class="toggle">
         <a>{"toggle dark mode"}</a>
-        <input class="test" type="checkbox" id="switch" onclick={theme_onclik} checked={switch_state}/>
-             <label class="tl" for="switch">
-                 </label>
-                 </div>
+        <input class="switch" type="checkbox" id="switch" onclick={theme_onclik} checked={switch_state}/>
+        <label class="tl" for="switch">
+        </label>
+        </div>
 
-        <div class="toggle">
+        <div class="toggle2">
         <a>{"Chinese/English"}</a>
-        <input class="test" type="checkbox" id="switch" onclick={lang_onclick} />
-             <label class="tl" for="switch">
-                 </label>
-                 </div>
+        <input class="switch" type="checkbox" id="cn_switch" onclick={lang_onclick} checked={lang_switch_state}/>
+        <label class="tl" for="cn_switch">
+        </label>
+        </div>
+
         </div>
         </nav>
         </header>

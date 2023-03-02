@@ -4,10 +4,10 @@ use model::post::Post;
 use serde_json::json;
 use std::{collections::HashMap, iter::Map};
 use stylist::style;
+use utils::language_provider::LangRrovider;
 use view::{footer, kanban, nav, post};
 use wasm_bindgen_futures::{future_to_promise, spawn_local};
 use yew::{prelude::*, suspense::use_future};
-
 #[function_component(Home)]
 pub fn home() -> Html {
     let style = style!(
@@ -36,11 +36,18 @@ pub fn home() -> Html {
     .unwrap();
     let data = use_state(|| Vec::<Post>::new());
     {
+        let lang_state = use_context::<UseReducerHandle<LangRrovider>>().unwrap();
+        let lang_switch_state = lang_state.is_eng;
         let data = data.clone();
         use_effect_with_deps(
             move |_| {
                 wasm_bindgen_futures::spawn_local(async move {
-                    let fetched_data: Vec<Post> = Request::new("http://127.0.0.1:3002/json")
+                    let url: &str = if lang_switch_state {
+                        "http://127.0.0.1:3002/json"
+                    } else {
+                        "http://127.0.0.1:3002/cnjson"
+                    };
+                    let fetched_data: Vec<Post> = Request::new(url)
                         .send()
                         .await
                         .unwrap()
@@ -59,13 +66,6 @@ pub fn home() -> Html {
             (),
         );
     }
-    let post = post::PostView {
-        img: String::from("https://pgw.udn.com.tw/gw/photo.php?u=https://uc.udn.com.tw/photo/2023/02/24/realtime/20285625.jpg&x=0&y=0&sw=0&sh=0&sl=W&fw=800&exp=3600&w=400&nt=1"),
-        time: String::from("March 05, 2019"),
-        title: String::from("title"),
-        content: String::from("Emoji can be enabled in a Hugo project in a number of ways."),
-    };
-
     html! {
         <>
             <nav::RhNav/>

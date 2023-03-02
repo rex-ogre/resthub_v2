@@ -30,6 +30,7 @@ fn using_serve_dir_with_assets_fallback() -> Router {
     Router::new()
         .route("/foo", get(|| async { "Hi from /foo" }))
         .route("/json", get(jsons))
+        .route("/cnjson", get(cn_jsons))
         .layer(
             CorsLayer::new()
                 .allow_origin("http://127.0.0.1:8080".parse::<HeaderValue>().unwrap())
@@ -62,6 +63,30 @@ async fn jsons() -> Json<serde_json::Value> {
     Json(serde_json::json!(post_list))
 }
 
+async fn cn_jsons() -> Json<serde_json::Value> {
+    tracing::debug!("開始掃檔案cn版");
+    let mut post_list: Vec<Post> = Vec::new();
+    for entry in glob("../backend/cn_assets/*.md").expect("Failed to read glob pattern") {
+        match entry {
+            Ok(path) => {
+                path.file_name().unwrap().to_str().unwrap();
+                let markdown_input = std::fs::read_to_string(&path).unwrap();
+                let parser = pulldown_cmark::Parser::new(&markdown_input);
+                let mut html_output = String::new();
+                pulldown_cmark::html::push_html(&mut html_output, parser);
+                let post = Post::new(
+                    &markdown_input,
+                    &path.file_name().unwrap().to_str().unwrap(),
+                );
+                post_list.push(post.clone());
+                tracing::debug!("{:?}", markdown_input);
+                tracing::debug!("{:?}", post);
+            }
+            Err(e) => tracing::debug!("錯誤{:?}", e),
+        }
+    }
+    Json(serde_json::json!(post_list))
+}
 async fn handle_error(_err: io::Error) -> impl IntoResponse {
     (StatusCode::INTERNAL_SERVER_ERROR, "Something went wrong...")
 }

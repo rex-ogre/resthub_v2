@@ -29,9 +29,15 @@ body {
     z-index:99999;
 }
 .logo {
+  background-color: inherit;
+  color: black;
+  border: none;
+  padding: 14px 28px;
   position: relative;
+  font-size: 22px;
   display:flex;
   left: 25px;
+  /*left: 20px; */
   top: 10px;
   height: 50px;
   width: 50px;

@@ -1,8 +1,11 @@
+use gloo_timers::callback::Timeout;
 use router::RootRoutes;
 use utils::language_provider::*;
 use utils::theme_provider::{self, Theme};
+use web_sys::window;
 use yew::prelude::*;
-use yew_router::{prelude::*, switch};
+use yew_router::prelude::*;
+
 #[function_component]
 pub fn RhNav() -> Html {
     let dark_state = use_context::<UseReducerHandle<Theme>>().unwrap();
@@ -11,7 +14,6 @@ pub fn RhNav() -> Html {
         Callback::from(move |_| {
             dark_state.dispatch(!dark_state.dark_theme);
             theme_provider::set_theme(!dark_state.dark_theme);
-            // theme_provider::mount_on_theme_dom(dark_state.dark_theme);
         })
     };
     let lang_state = use_context::<UseReducerHandle<LangRrovider>>().unwrap();
@@ -20,15 +22,31 @@ pub fn RhNav() -> Html {
         Callback::from(move |_| {
             lang_state.dispatch(!lang_state.is_eng);
             set_lang(!lang_state.is_eng);
+            let timeout = Timeout::new(1_000, move || {
+                // Do something after the one second timeout is up!
+                window().unwrap().location().reload();
+            });
+
+            timeout.forget();
+        })
+    };
+
+    let navigator = use_navigator().unwrap();
+    let title_onclick: Callback<MouseEvent> = {
+        Callback::from(move |_| {
+            navigator.push(&RootRoutes::Root);
         })
     };
     mount_on_lang_dom(lang_switch_state);
     theme_provider::mount_on_theme_dom(switch_state);
+
     html! {
         <>
         <header>
         <nav class="nav-menu">
-        <h2 class="logo">{"RestHub"} </h2>
+        <button onclick={title_onclick} class="logo">  {"RestHub"} </button>
+
+
         <input type="checkbox" id="active"/>
         <label for="active" class="menu-btn"><span></span></label>
         <label for="active" class="close"></label>

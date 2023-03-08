@@ -6,7 +6,6 @@ use std::{collections::HashMap, iter::Map};
 use stylist::style;
 use utils::language_provider::LangRrovider;
 use view::{footer, kanban, nav, post};
-use wasm_bindgen_futures::{future_to_promise, spawn_local};
 use yew::{prelude::*, suspense::use_future};
 #[function_component(Home)]
 pub fn home() -> Html {
@@ -66,6 +65,7 @@ pub fn home() -> Html {
             (),
         );
     }
+
     html! {
         <>
             <nav::RhNav/>

@@ -14,3 +14,5 @@ patternfly-yew = "0.2.3"
 utils = { path = "../utils"}
 yew-router = "0.17.0"
 router = { path = "../router"}
+gloo-timers = "0.2.6"
+web-sys = "0.3.6"

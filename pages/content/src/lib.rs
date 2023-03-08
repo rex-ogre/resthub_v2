@@ -1,12 +1,12 @@
 use log::info;
 use pulldown_cmark::{html, Options, Parser};
+use std::ffi;
 use std::{env, fs};
 use stylist::style;
 use utils::theme_provider::Theme;
 use view::{footer, nav};
-use yew::prelude::*;
 use web_sys::Element;
-use std::ffi;
+use yew::prelude::*;
 #[function_component(Content)]
 pub fn content() -> Html {
     let style = style!(
@@ -27,8 +27,6 @@ pub fn content() -> Html {
     "
     )
     .unwrap();
-
-
 
     let t = std::include_str!("../../../post/test.md");
     let mut options = Options::empty();
@@ -71,7 +69,7 @@ pub fn post() -> Html {
     {
         let inner_html = html_output.clone();
         let node_ref = node_ref.clone();
-        
+
         use_effect(move || {
             let el = node_ref.cast::<Element>().unwrap();
             el.set_inner_html(inner_html.as_str());

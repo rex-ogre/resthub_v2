@@ -23,7 +23,6 @@ pub fn RhNav() -> Html {
             lang_state.dispatch(!lang_state.is_eng);
             set_lang(!lang_state.is_eng);
             let timeout = Timeout::new(1_000, move || {
-                // Do something after the one second timeout is up!
                 window().unwrap().location().reload();
             });
 

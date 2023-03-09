@@ -1,6 +1,7 @@
+use router::RootRoutes;
 use stylist::style;
 use yew::prelude::*;
-
+use yew_router::prelude::*;
 #[derive(Clone, PartialEq, Properties)]
 pub struct PostView {
     pub img: String,
@@ -58,14 +59,24 @@ pub fn PostComponent(props: &PostView) -> Html {
     margin-left:auto;
     
 }
+ a {
+text-decoration: none;
+    color: inherit;
+  position: relative;
+  }
         "
     )
     .unwrap();
 
     html! {
     <>
+
                     <article class={classes!("grid-2_article",{&styles.get_class_name().to_string()})}>
+
+        <Link<RootRoutes> to={RootRoutes::Search}>
                       <img width="300" height="300" class="regular_pic" src={props.img.to_owned()}/>
+        </Link<RootRoutes>>
+        <Link<RootRoutes> to={RootRoutes::Search}>
                       <div class="grid-2_article_metadata">
                       <time>{props.time.to_owned()}</time>
                       <h2>{props.title.to_owned()}</h2>
@@ -75,6 +86,7 @@ pub fn PostComponent(props: &PostView) -> Html {
                           </p>
                       </div>
                       </div>
+        </Link<RootRoutes>>
                     </article>
                     </>
     }

@@ -10,4 +10,6 @@ pub enum RootRoutes {
     Search,
     #[at("/content/")]
     Content,
+    #[at("/post/:id")]
+    Post { id: String },
 }

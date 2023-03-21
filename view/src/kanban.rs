@@ -63,7 +63,7 @@ pub fn KanbanComponent(props: &PostView) -> Html {
                   <h2>{props.title.to_owned()}</h2>
                   <div>
                       <p class="kanban_content">
-                      {props.content.to_owned()}
+                      {props.info.to_owned()}
                       </p>
                   </div>
                   </div>

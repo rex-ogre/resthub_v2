@@ -8,8 +8,6 @@ pub enum RootRoutes {
     About,
     #[at("/search")]
     Search,
-    #[at("/content/")]
-    Content,
     #[at("/post/:id")]
     Post { id: String },
 }

@@ -79,7 +79,8 @@ pub fn home() -> Html {
                                     img: c.image,
                                     time: c.date,
                                     title: c.title,
-                                    content: c.info,
+                                    content: c.content,
+                                    info:c.info
                                 }
                                  />
                         }
@@ -99,7 +100,8 @@ pub fn home() -> Html {
                                     img: c.image,
                                     time: c.date,
                                     title: c.title,
-                                    content: c.info,
+                                    info: c.info,
+                                    content: c.content,
                                 }
                                  />
                         }

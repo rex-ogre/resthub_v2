@@ -6,6 +6,7 @@ pub struct Post {
     pub title: String,
     pub info: String,
     pub image: String,
+    pub content: String,
 }
 impl Post {
     pub fn new(content: &str, filename: &str) -> Self {
@@ -64,6 +65,7 @@ impl Post {
             date: _date,
             title: _title,
             info: _content_slice,
+            content: content.to_string(),
             image: _image_slice,
         }
     }

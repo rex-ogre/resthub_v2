@@ -12,8 +12,7 @@ fn switch(routes: RootRoutes) -> Html {
         RootRoutes::About => html! { <About /> },
         RootRoutes::Root => html! {<Home/>},
         RootRoutes::Search => html! {<Search/>},
-        RootRoutes::Post { id } => html! {<p>{format!("You are looking at Post {}", id)}</p>},
-        _ => html! {<Content/>},
+        RootRoutes::Post { id } => html! {<Content/>},
     }
 }
 

@@ -7,6 +7,7 @@ pub struct PostView {
     pub img: String,
     pub time: String,
     pub title: String,
+    pub info: String,
     pub content: String,
 }
 #[function_component]
@@ -72,17 +73,16 @@ text-decoration: none;
     <>
 
                     <article class={classes!("grid-2_article",{&styles.get_class_name().to_string()})}>
-
-        <Link<RootRoutes> to={RootRoutes::Search}>
+        <Link<RootRoutes> to={RootRoutes::Post { id:String::from(props.title.to_owned())}}>
                       <img width="300" height="300" class="regular_pic" src={props.img.to_owned()}/>
         </Link<RootRoutes>>
-        <Link<RootRoutes> to={RootRoutes::Search}>
+        <Link<RootRoutes> to={RootRoutes::Post { id:String::from(props.title.to_owned())}}>
                       <div class="grid-2_article_metadata">
                       <time>{props.time.to_owned()}</time>
                       <h2>{props.title.to_owned()}</h2>
                       <div>
                           <p class="giu_content">
-                          {props.content.to_owned()}
+                          {props.info.to_owned()}
                           </p>
                       </div>
                       </div>

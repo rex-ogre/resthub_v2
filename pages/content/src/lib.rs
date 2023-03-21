@@ -38,50 +38,57 @@ pub fn content() -> Html {
     html::push_html(&mut html_output, parser);
 
     log::info!("{}", html_output);
-    html! {
-        <>
-            <nav::RhNav/>
-                  <div class={&style.get_class_name().to_string()}>
-                <article>
-                <p>{t}</p>
-                <Post/>
-                 </article>
-                </div>
+    web_sys::window()
+        .and_then(|window| window.document())
+        .map_or_else(
+            || {
+                html! { <p>{ "Failed to resolve `document`." }</p> }
+            },
+            |document| match document.create_element("div") {
+                Ok(div) => {
+                    html! {
+                        <>
+                            <nav::RhNav/>
+                                  <div class={&style.get_class_name().to_string()}>
+                                <article>
+                                <p>{t}</p>
+                                <inside  data={t}/>
+                                 </article>
+                                </div>
 
-                //<footer::rh_footer/>
-            </>
-    }
+                                //<footer::rh_footer/>
+                            </>
+                    }
+                }
+                Err(e) => html! { <p>{ format!("{:?}", &e) }</p> },
+            },
+        )
 }
 #[derive(Debug, Clone, Eq, PartialEq, Properties)]
-pub struct Props {
+pub struct content {
     pub inner_html: String,
 }
-#[function_component(Post)]
-pub fn post() -> Html {
-    let t = std::include_str!("../../../post/test.md");
+#[function_component(Inside)]
+pub fn inside(props: &content) -> Html {
     let mut options = Options::empty();
     options.insert(Options::ENABLE_STRIKETHROUGH);
-    let parser = Parser::new_ext(t, options);
-    // Write to String buffer.
+    let parser = Parser::new_ext(&props.inner_html, options);
     let mut html_output = String::new();
     html::push_html(&mut html_output, parser);
-    let node_ref = NodeRef::default();
-    {
-        let inner_html = html_output.clone();
-        let node_ref = node_ref.clone();
 
-        use_effect(move || {
-            let el = node_ref.cast::<Element>().unwrap();
-            el.set_inner_html(inner_html.as_str());
-            || {}
-        });
-    }
-    html! {
-      <>
-        <div>
-          <h1>{"Yew Tailwindcss"}</h1>
-        </div>
-        <div ref={node_ref.clone()} />
-      </>
-    }
+    log::info!("{}", html_output);
+    web_sys::window()
+        .and_then(|window| window.document())
+        .map_or_else(
+            || {
+                html! { <p>{ "Failed to resolve `document`." }</p> }
+            },
+            |document| match document.create_element("div") {
+                Ok(div) => {
+                    div.set_inner_html(&html_output);
+                    yew::virtual_dom::VNode::VRef(div.into())
+                }
+                Err(e) => html! { <p>{ format!("{:?}", &e) }</p> },
+            },
+        )
 }
